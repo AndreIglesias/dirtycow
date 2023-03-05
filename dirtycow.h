@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:48:48 by ciglesia          #+#    #+#             */
-/*   Updated: 2023/03/05 17:13:07 by ciglesia         ###   ########.fr       */
+/*   Updated: 2023/03/05 19:13:50 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define PWDFILE "/etc/passwd"
 # define PWDBKP "/tmp/passwd.bkp"
 # define PWD "cow"
-# define SALT "pwn"
+# define SALT "dirtycow"
 
 typedef struct s_userinfo {
    char *username;
